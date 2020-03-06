@@ -1,0 +1,23 @@
+<!--logs.wxml-->
+<view>
+  <view class="conent">
+    <view style="font-size:12px">
+      <text>01</text><text style="color:#a7a7a7">/10</text>
+    </view>
+    <view class="cen">
+      <view>
+        <text style="font-size:26px;font-weight: 700;">洗衣液桶</text>
+      </view>
+      <view wx:for="{{list}}" wx:key="*this" class="con-list">
+        <text>{{item}}</text>
+      </view>
+    </view>
+  </view>
+  <view class="foot">
+    <view wx:for="{{foot_list}}" style="color:{{index===foot_type?'#f9bd00':'#333'}}" wx:key="*this" class="foot-list">
+      <icon class="iconfont {{item.ico}}"></icon>
+      <view><text>{{item.tit}}</text></view>
+    </view>
+  </view>
+</view>
+

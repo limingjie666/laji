@@ -1,0 +1,19 @@
+<!--pages/setup/setup.wxml-->
+<view>
+  <view class="conent">
+   <view wx:for="{{json}}">
+    <view style="background-color:#f7f7f7;color:#9e9e9e;font-size:10px;height:40px;position: relative">
+      <text style="position: absolute;bottom:5px;left:10px;">{{item.title}}</text>
+    </view>
+    <view wx:for="{{item.list}}" style="height:30px;font-size:12px;line-height:30px;border-bottom:1px #f7f7f7 solid;padding:0 10px;">
+      <text>{{item}}</text>
+    </view>
+   </view>
+  </view>
+  <view class="foot">
+    <view wx:for="{{foot_list}}" style="color:{{index===foot_type?'#f9bd00':'#333'}}" wx:key="*this" class="foot-list">
+      <icon class="iconfont {{item.ico}}"></icon>
+      <view><text>{{item.tit}}</text></view>
+    </view>
+  </view>
+</view>
