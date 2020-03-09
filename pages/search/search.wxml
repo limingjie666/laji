@@ -1,0 +1,13 @@
+<!--pages/search/search.wxml-->
+
+<view>
+  <view class="head">
+    <input id="head-input" bindinput="inputedit"  value="{{val}}" type="text" placeholder="搜索垃圾查看对应分类" autofocus="autofocus" ></input>
+    <icon class="iconfont icon-changyongtubiao_yonghusousuo"></icon>
+    <text bindtap="click" style="font-size:12px;float:right;line-height:30px;">取消</text>
+  </view>
+  <view wx:for="{{list}}" class="list">
+    <text style="color:{{index===1?'blue':'yellow'}};font-size:14px">{{item.itemName}} [{{item.itemCategory}}]</text>
+  </view>
+  
+</view>

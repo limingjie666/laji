@@ -29,48 +29,41 @@ Page({
     left_type:0,
     right_arr: ['CoCo的青稞', '姑娘果', 'CoCo的青稞', '姑娘果', 'CoCo的青稞', '姑娘果', 'CoCo的青稞', '姑娘果'],
     foot_list: [{ ico: 'icon-shu', tit: '指南' }, { ico: 'icon-fen', tit: '测试' }, { ico: 'icon-icon_xinyong_xianxing_jijin-', tit: '专题' }, { ico: 'icon-shezhi', tit: '设置' }],
-    foot_type:0
+    foot_type:0,
+    ajax: null,
+    one:null,
+    tow:null
+    
   },
-  //事件处理函数
-  bindViewTap: function() {
+  tabs:function(ev){
+    this.setData({ left_type: ev.currentTarget.dataset.index})
+  },
+  bindViewTap: function(ev) {
+    var url=''
+    if (ev.currentTarget.dataset.index===0){
+      url='../index/index'
+    } else if (ev.currentTarget.dataset.index === 1){
+      url = '../logs/logs'
+    } else if (ev.currentTarget.dataset.index === 2) {
+      url = '../special/special'
+    } else if (ev.currentTarget.dataset.index === 3) {
+      url = '../setup/setup'
+    }
     wx.navigateTo({
-      url: '../logs/logs'
+      url: url
     })
   },
-  onLoad: function () {
-    if (app.globalData.userInfo) {
-      this.setData({
-        userInfo: app.globalData.userInfo,
-        hasUserInfo: true
-      })
-    } else if (this.data.canIUse){
-      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-      // 所以此处加入 callback 以防止这种情况
-      app.userInfoReadyCallback = res => {
-        this.setData({
-          userInfo: res.userInfo,
-          hasUserInfo: true
-        })
-      }
-    } else {
-      // 在没有 open-type=getUserInfo 版本的兼容处理
-      wx.getUserInfo({
-        success: res => {
-          app.globalData.userInfo = res.userInfo
-          this.setData({
-            userInfo: res.userInfo,
-            hasUserInfo: true
-          })
-        }
-      })
-    }
-  },
-  getUserInfo: function(e) {
-    console.log(e)
-    app.globalData.userInfo = e.detail.userInfo
-    this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true
+  onLoad: function (){
+    var str = getApp().globalData.ajax.data[this.data.left_type > 1 ? this.data.left_type - 2 : this.data.left_type + 2].require.split('；')
+    var str1 = getApp().globalData.ajax.data[this.data.left_type > 1 ? this.data.left_type - 2 : this.data.left_type + 2].common.split('、')
+    this.setData({ ajax: getApp().globalData.ajax.data, one: str[0], tow: str[1], right_arr:str1})
+    console.log(this.data.ajax)
+    console.log(this.data.one)
+    
+  }, 
+    click() {
+    wx.navigateTo({
+      url: "../search/search"
     })
   }
 })

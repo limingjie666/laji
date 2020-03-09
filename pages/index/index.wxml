@@ -1,29 +1,30 @@
 <!--index.wxml-->
+
 <view>
   <view class="head">
     <icon class="iconfont icon-dizhi"></icon>
     <text class="head-span">上海</text>
-    <input id="head-input" type="text" placeholder="搜索垃圾查看对应分类"></input>
+    <input bindtap="click" id="head-input" type="text" placeholder="搜索垃圾查看对应分类"></input>
     <icon class="iconfont icon-changyongtubiao_yonghusousuo"></icon>
   </view>
   <view class="conent">
     <view class="conent-left">
-      <view wx:for="{{arr}}"  wx:key="*this" class="left-list">
+      <view wx:for="{{arr}}" bindtap="tabs" data-index="{{index}}" wx:key="*this" class="left-list">
         <text style="color:{{index==left_type?'#ffffff':'#a6a6a6'}}" class="left-text">{{item.title}}</text>
         <view style="left:{{index==left_type?'0px':'-95%'}};background-color:{{item.color}}" class="left-list-div"></view>
       </view>
     </view>
     <view class="conent-right">
       <view class="notice">
-        <image class="imges" src="img/0.png"></image>
-        <view style="text-indent: 60rpx;"><text class="text-s bold">湿垃圾 </text><text class="text-s">是指易腐的生物质废弃物。包括剩菜剩饭、瓜皮植、肉类碎骨、过期食品、餐厨垃圾等</text></view>
+        <image class="imges" src="img/{{left_type}}.png"></image>
+        <view style="text-indent: 60rpx;"><text class="text-s bold">{{ajax[left_type>1?left_type-2:left_type+2].name}}：</text><text class="text-s">{{ajax[left_type>1?left_type-2:left_type+2].explain}}</text></view>
         
-        <view><text class="text-s bold">投放邀求</text></view>
+        <view><text class="text-s bold">投放指导</text></view>
         <view>
-          <text class="text-s">● 纯流质的食物垃圾,如牛奶等,应直接倒进下水口</text>
+          <text class="text-s">● {{one}}</text>
         </view>
         <view>
-          <text class="text-s">● 有包装物的湿垃圾应将包装物取出后分类投放,包装物请投放到对应的可回收物容器或干垃圾容器</text>
+          <text class="text-s">● {{tow}}</text> 
         </view>
       </view>
       <view wx:for="{{right_arr}}" style="background-color:{{index%2===0?'#fff':'#f7f7f7'}}" wx:key="*this" class="right-list">
@@ -32,7 +33,7 @@
     </view>  
   </view>
   <view class="foot">
-    <view wx:for="{{foot_list}}" style="color:{{index===foot_type?'#f9bd00':'#333'}}" wx:key="*this" class="foot-list">
+    <view wx:for="{{foot_list}}" bindtap="bindViewTap" data-index="{{index}}" style="color:{{index===foot_type?'#f9bd00':'#333'}}" wx:key="*this" class="foot-list">
       <icon class="iconfont {{item.ico}}"></icon>
       <view><text>{{item.tit}}</text></view>
     </view>

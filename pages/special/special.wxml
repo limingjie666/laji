@@ -8,7 +8,7 @@
     </view>
   </view>
   <view class="foot">
-    <view wx:for="{{foot_list}}" style="color:{{index===foot_type?'#f9bd00':'#333'}}" wx:key="*this" class="foot-list">
+    <view wx:for="{{foot_list}}" bindtap="bindViewTap" data-index="{{index}}" style="color:{{index===foot_type?'#f9bd00':'#333'}}" wx:key="*this" class="foot-list">
       <icon class="iconfont {{item.ico}}"></icon>
       <view><text>{{item.tit}}</text></view>
     </view>
